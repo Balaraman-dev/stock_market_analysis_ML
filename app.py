@@ -5,6 +5,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import pandas as pd
+
 
 # Load the trained model
 model = load_model("models/lstm_model.h5")
@@ -15,13 +17,17 @@ st.title("Stock Market Prediction App")
 # User input
 ticker = st.text_input("Enter Stock Ticker (e.g., TSLA):")
 
+start_date = "2010-01-01"
+end_date = "2025-04-01"
 if ticker:
-    ticker = ticker.strip().upper()  # ✅ Ensure valid format
+    ticker = ticker.strip().upper() 
+    print("Ticker symbol",ticker)
 
     try:
         # Fetch data
-        data = yf.download(ticker, period="5y")
-        if data.empty or 'Close' not in data.columns:
+        stock = yf.Ticker(ticker)
+        data = stock.history(start=start_date, end=end_date)
+        if data.empty:
             st.error("No data found for the given stock ticker. Please check the ticker symbol.")
             st.stop()
 
@@ -35,7 +41,7 @@ if ticker:
         scaled_data = scaler.fit_transform(close_prices)
 
         # Prepare input sequence
-        seq_length = 60
+        seq_length = 50
         if len(scaled_data) < seq_length:
             st.error("Not enough historical data to make a prediction.")
             st.stop()
@@ -55,12 +61,14 @@ if ticker:
 
         # Display results
         st.subheader("Predicted Stock Prices for Next 50 Days")
-        st.line_chart(predictions)
+        st.bar_chart(predictions)
 
         # Plot actual vs predicted prices
         fig, ax = plt.subplots()
         ax.plot(data.index[-60:], data['Close'].values[-60:], label="Actual Prices", color="blue")
-        ax.plot(range(len(data), len(data) + 50), predictions, label="Predicted Prices", color="red")
+        future_dates = pd.date_range(start=data.index[-1] + pd.Timedelta(days=1), periods=50)
+        ax.plot(future_dates, predictions, label="Predicted Prices", color="red")
+
         ax.set_title(f"{ticker} - Actual vs Predicted Stock Prices")
         ax.set_xlabel("Time Steps")
         ax.set_ylabel("Stock Price")
