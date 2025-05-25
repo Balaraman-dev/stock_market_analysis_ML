@@ -23,4 +23,72 @@ This project predicts stock market trends using Long Short-Term Memory (LSTM) ne
    ```bash
    pip install -r requirements.txt
 
+2. Switch To Virtual Environment
+   .\env\Scripts\activate
 
+3. Run the Streamlit Code
+   streamlit run end.py
+
+
+## Directory Tree :
+   .
+   ├── __pycache__
+   ├── data
+   │   ├── company_datasets
+   │   │   ├── historical_data.csv
+   │   │   ├── X.npy
+   │   │   └── y.npy
+   │   └── env
+   │       ├── etc
+   │       ├── Include
+   │       ├── Lib
+   │       ├── Scripts
+   │       ├── share
+   │       └── pyvenv.cfg
+   ├── models
+   │   ├── cnn_lstm_model.h5
+   │   └── lstm_model.h5
+   ├── notebooks
+   │   └── env
+   ├── .gitignore
+   ├── download_data.py
+   ├── end.py
+   ├── lstm_cnn.py
+   ├── lstm.py
+   ├── lstm+lstm_with_cnn.py
+   ├── randomforest.py
+   ├── README.md
+   ├── requirements.txt
+   └── test.py
+   └── utils.py
+
+## Explanation of the Structure:
+
+   # Root Directory :
+   Contains all the main files and subdirectories.
+   # __pycache__ :
+   A hidden directory typically used by Python to store compiled bytecode files.
+   # data :
+   Contains datasets and related files.
+   # company_datasets :
+   Subdirectory holding dataset files such as historical_data.csv, X.npy, and y.npy.
+   # env :
+   A virtual environment setup for managing dependencies. It includes standard directories like etc, Include, Lib, Scripts, share, and the configuration file pyvenv.cfg.
+   # models :
+   Contains trained model files in .h5 format, specifically:
+   # cnn_lstm_model.h5
+   lstm_model.h5
+   # notebooks :
+   Likely contains Jupyter Notebook environments or related configurations.
+   Files in the Root Directory :
+   # .gitignore : Used to specify files or directories that should be ignored by Git version control.
+   # download_data.py : Script for downloading data.
+   # end.py : Possibly a script for final processing or cleanup.
+   # lstm_cnn.py : Script for LSTM-CNN model-related tasks.
+   # lstm.py : Script for LSTM model-related tasks.
+   # lstm+lstm_with_cnn.py : Script for combining LSTM and CNN models.
+   # randomforest.py : Script for Random Forest model-related tasks.
+   # README.md : Markdown file providing project documentation or instructions.
+   # requirements.txt : File listing Python dependencies required for the project.
+   # test.py : Script for testing purposes.
+   # utils.py : Utility functions or helper scripts.
