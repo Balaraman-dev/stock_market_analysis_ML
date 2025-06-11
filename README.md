@@ -1,3 +1,7 @@
+#References IEEE papers for Stock Market Analysis:
+https://ieeexplore.ieee.org/document/10434490
+https://ieeexplore.ieee.org/document/10894968
+
 # Stock Market Prediction Using LSTM
 
 This project predicts stock market trends using Long Short-Term Memory (LSTM) neural networks. The model is trained on historical stock price data and deployed using Streamlit.
